@@ -19,6 +19,7 @@ const Home = ({ notes }) => {
         title: "Deleted Successful",
         icon: "success",
       });
+      location.reload();
     });
   };
   const handle_open_form = (id) => {
@@ -39,10 +40,11 @@ const Home = ({ notes }) => {
     };
     axios(config).then((res) => {
       console.log(res);
-    });
-    Swal.fire({
-      title: "Update Successful",
-      icon: "success",
+      Swal.fire({
+        title: "Update Successful",
+        icon: "success",
+      });
+      location.reload();
     });
   };
   return (
