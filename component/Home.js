@@ -10,7 +10,7 @@ const Home = ({ notes }) => {
   const handle_delete = (id) => {
     let config = {
       method: "DELETE",
-      baseURL: `http://localhost:3000/api/notes`,
+      baseURL: `https://fullstack-snowy.vercel.app/api/notes`,
       url: `/${id}`,
     };
     axios(config).then((res) => {
@@ -31,7 +31,7 @@ const Home = ({ notes }) => {
     let ID = update_id;
     let config = {
       method: "PUT",
-      baseURL: `http://localhost:3000/api/notes`,
+      baseURL: `https://fullstack-snowy.vercel.app/api/notes`,
       url: `/${ID}`,
       data: {
         title: event.target.titleupdate.value,

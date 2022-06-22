@@ -11,13 +11,13 @@ const Create = () => {
 
   const handel_create = () => {
     event.preventDefault();
-    let url = `http://localhost:3000/api/notes`;
+    let url = `https://fullstack-snowy.vercel.app/api/notes`;
     let data = {
       title: event.target.title.value,
       description: event.target.description.value,
     };
+    console.log(data);
     axios.post(url, data).then((res) => {
-      console.log(data);
       console.log(res);
       Swal.fire({
         title: "Note Create Successful",
