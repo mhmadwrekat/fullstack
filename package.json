@@ -6,9 +6,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "isomorphic-unfetch": "^3.1.0",
+    "mongoose": "^6.4.0",
     "next": "latest",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "sweetalert2": "^11.4.18"
   },
   "devDependencies": {
     "@types/node": "17.0.35",
