@@ -6,6 +6,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const Home = ({ notes }) => {
   const [open, setOpen] = useState(false);
   const [update_id, setUpdateId] = useState("");
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
 
   const handle_delete = (id) => {
     let config = {
@@ -23,15 +25,25 @@ const Home = ({ notes }) => {
     });
   };
   const handle_open_form = (id) => {
-    setOpen(true);
-    setUpdateId(id);
+    let config = {
+      method: "GET",
+      baseURL: `${API_URL}`,
+      url: `/${id}`,
+    };
+    axios(config).then((res) => {
+      setTitle(res.data.data.title);
+      setDescription(res.data.data.description);
+
+      setOpen(true);
+      setUpdateId(id);
+    });
   };
   const handle_update = () => {
     event.preventDefault();
     let ID = update_id;
     let config = {
       method: "PUT",
-      baseURL: API_URL,
+      baseURL: `${API_URL}`,
       url: `/${ID}`,
       data: {
         title: event.target.titleupdate.value,
@@ -47,6 +59,12 @@ const Home = ({ notes }) => {
       location.reload();
     });
   };
+  const handle_title = () => {
+    setTitle(event.target.value);
+  };
+  const handle_desc = () => {
+    setDescription(event.target.value);
+  };
   return (
     <React.Fragment>
       <p className="py-5 text-center text-4xl text-gray-700 font-bold">
@@ -61,6 +79,7 @@ const Home = ({ notes }) => {
                 handle_update();
               }}
             >
+              {console.log(description)}
               <div className="mb-4">
                 <label
                   className="block text-gray-100 text-sm font-bold mb-2"
@@ -72,8 +91,10 @@ const Home = ({ notes }) => {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="titleupdate"
                   type="text"
-                  placeholder="title"
+                  placeholder={title}
                   required
+                  onChange={handle_title}
+                  value={title}
                 />
               </div>
               <div className="mb-6">
@@ -87,8 +108,10 @@ const Home = ({ notes }) => {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="descriptionupdate"
                   type="text"
-                  placeholder="description"
+                  placeholder={description}
                   required
+                  onChange={handle_desc}
+                  value={description}
                 />
               </div>
               <div className="flex items-center justify-end">
