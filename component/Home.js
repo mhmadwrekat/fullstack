@@ -19,7 +19,6 @@ const Home = ({ notes }) => {
         title: "Deleted Successful",
         icon: "success",
       });
-      location.reload();
     });
   };
   const handle_open_form = (id) => {
@@ -45,7 +44,6 @@ const Home = ({ notes }) => {
       title: "Update Successful",
       icon: "success",
     });
-    location.reload();
   };
   return (
     <React.Fragment>
