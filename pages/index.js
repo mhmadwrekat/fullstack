@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../component/Nav";
 import Home from "../component/Home";
+import axios from "axios";
 
-export async function getServerSideProps({ req, res }) {
-  // Cache the content of this page for 12 hrs
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=604800, stale-while-revalidate=59"
-  );
-  const resp = await fetch("https://fullstack-snowy.vercel.app/api/notes");
-  const { data } = await resp.json();
-  return {
-    props: {
-      notes: data,
-    },
+const index = () => {
+  const [notes, setNotes] = useState();
+
+  const get_notes = () => {
+    axios.get(`https://fullstack-snowy.vercel.app/api/notes`).then((res) => {
+      setNotes(res.data);
+      console.log(res.data);
+    });
   };
-}
 
-const index = (props) => {
+  useEffect(() => {
+    get_notes();
+  }, [notes]);
   return (
     <React.Fragment>
       <Nav create={true} />
-      <Home notes={props.notes} />
+      <Home notes={notes} />
     </React.Fragment>
   );
 };
