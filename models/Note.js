@@ -15,6 +15,3 @@ const NoteSCM = new mongoose.Schema({
 });
 
 module.exports = mongoose.models.Note || mongoose.model("Note", NoteSCM);
-/*
-mongodb+srv://wrekat:mhmas123@cluster0.les8wvw.mongodb.net/?retryWrites=true&w=majority
-*/
